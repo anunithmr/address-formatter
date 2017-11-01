@@ -1,6 +1,7 @@
 package com.friday.service;
 
 import com.friday.dto.AddressResponse;
+import com.friday.errors.MalformedAddressException;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -96,5 +97,16 @@ public class RegexAddressParserTest {
 
     Assert.assertTrue("Calle 39".equals(response.getStreetName()));
     Assert.assertEquals("No 1540", response.getStreetNumber());
+  }
+
+  @Test
+  public void testIllegalAddressFormat(){
+    String address = "Calle";
+    RegexAddressParser addressParser = new RegexAddressParser();
+    try {
+      AddressResponse response = addressParser.extractAddress(address);
+    } catch (MalformedAddressException e){
+      Assert.assertEquals("Unrecognizable address format.", e.getMessage());
+    }
   }
 }

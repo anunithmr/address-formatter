@@ -1,5 +1,8 @@
 package com.friday.resource;
 
+import javax.validation.Valid;
+import javax.validation.Validator;
+
 import com.friday.dto.AddressRequest;
 import com.friday.dto.AddressResponse;
 import com.friday.service.RegexAddressParser;
@@ -22,7 +25,7 @@ public class AddressResource {
   }
 
   @RequestMapping(method = RequestMethod.POST)
-  public AddressResponse getAddressLine(@RequestBody AddressRequest addressRequest){
+  public AddressResponse getAddressLine(@RequestBody @Valid AddressRequest addressRequest){
     return regexAddressParser.extractAddress(addressRequest.getAddress());
   }
 }

@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 import com.friday.dto.AddressResponse;
 import com.friday.service.AddressParser;
 
-public enum RegexPattern implements AddressParser{
+public enum AddressRegexPattern implements AddressParser{
   REGEX_PATTERN_1("^(.*)(No|NO )(.*)$") {
     public AddressResponse parseAddres(String address) {
       Matcher matcher = this.match(address);
@@ -37,7 +37,7 @@ public enum RegexPattern implements AddressParser{
   public Pattern pattern;
   private String patternRegex;
 
-  RegexPattern(String patternString){
+  AddressRegexPattern(String patternString){
     this.patternRegex = patternString;
     this.pattern = Pattern.compile(patternString);
   }
